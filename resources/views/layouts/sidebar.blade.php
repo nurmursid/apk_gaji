@@ -1,13 +1,13 @@
-<div class="sidebar" data-color="white" data-active-color="danger">
+<div class="sidebar" data-color="black" data-active-color="info">
       <div class="logo">
         <a class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="./assets/img/salary.png">
+            <img src="./assets/img/default-avatar.png">
           </div>
-          <p>CT</p>
+          <p></p>
         </a>
         <a class="simple-text logo-normal">
-          AGK
+          Admin
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -15,12 +15,13 @@
       </div>
 
       
-      <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper" >
         <ul class="nav">
 
-          <li class="active ">
+          <li class="active " >
             <a href="{{ route('pegawai.index') }}">
               <i class="nc-icon nc-single-02"></i>
+              
               <p>Karyawan</p>
             </a>
           </li>

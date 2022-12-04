@@ -96,4 +96,18 @@ class PerusahaanController extends Controller
         return redirect()->route('perusahaan.index')->with('success', 'Data perusahaan berhasil dihapus');
     }
 
+    public function soft_delete($id, Request $request) {
+
+        // Menggunakan Query Builder Laravel dan pegawaid Bindings untuk valuesnya
+        DB::update('UPDATE perushaan 
+        SET deleted_at = now()
+        WHERE id_perushaan = :id_perushaan',
+        [
+            'id_perushaan' => $id,
+        ]
+        );
+
+        return redirect()->route('perushaan.index')->with('success', 'Data perushaan berhasil dihapus');
+    }
+
 }

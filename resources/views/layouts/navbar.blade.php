@@ -17,10 +17,10 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            
             <ul class="navbar-nav ms-auto">
+
               <form action="" method="GET">
-              <div class="input-group no-border">
+              <div class= "input-group   no-border ">
                 <input type="text" name="search" class="form-control" placeholder="Search...">
                 <input type="submit" value="Search">
                 <div class="input-group-append">

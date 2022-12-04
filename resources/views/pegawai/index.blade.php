@@ -40,12 +40,14 @@
                 <td>
                     <a href="{{ route('pegawai.edit', $data->id_pegawai) }}" type="button" class="btn btn-warning rounded-3">
                     <i class="nc-icon nc-tap-01"></i>
+                    edit
                     </a>
 
                     <!-- Button trigger modal -->
                     <!-- Hard Delete -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal{{ $data->id_pegawai }}">
                         <i class="nc-icon nc-simple-remove"></i>
+                        delete
                     </button>
 
                     <!-- Modal -->
@@ -72,8 +74,9 @@
 
                     <!-- Button trigger modal -->
                     <!-- Soft Delete -->
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#softdelete{{ $data->id_pegawai }}">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#softdelete{{ $data->id_pegawai }}">
                         <i class="nc-icon nc-scissors"></i>
+                        soft delete
                     </button>
 
                     <!-- Modal -->

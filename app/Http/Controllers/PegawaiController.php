@@ -30,7 +30,7 @@ class PegawaiController extends Controller
         ]
         );
 
-            // mengirim data pegawai ke view index
+        // mengirim data pegawai ke view index
         return view('pegawai.index',['datas' => $datas]);
         }
 

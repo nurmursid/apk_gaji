@@ -8,13 +8,18 @@ use Illuminate\Support\Facades\Hash;
 
 class GajiController extends Controller
 {
-    public function index() {
-        $datas = DB::select('select * from gaji');
+    public function index(Request $request) {
+
+        $datas = DB::select('SELECT * from gaji
+        WHERE gaji.deleted_at is NULL',
+    
+    );
 
         return view('gaji.index')
             ->with('datas', $datas);
-    }
 
+    }
+    
     public function create() {
         return view('gaji.add');
     }
@@ -92,6 +97,20 @@ class GajiController extends Controller
 
         // Menggunakan laravel eloquent
         // gaji::where('id_gaji', $id)->delete();
+
+        return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus');
+    }
+
+    public function soft_delete($id, Request $request) {
+
+        // Menggunakan Query Builder Laravel dan pegawaid Bindings untuk valuesnya
+        DB::update('UPDATE gaji 
+        SET deleted_at = now()
+        WHERE id_gaji = :id_gaji',
+        [
+            'id_gaji' => $id,
+        ]
+        );
 
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus');
     }

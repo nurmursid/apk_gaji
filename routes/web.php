@@ -46,6 +46,7 @@ Route::prefix('gaji')->group(function(){
     Route::get('edit/{id}', [GajiController::class, 'edit'])->name('gaji.edit');
     Route::post('update/{id}', [GajiController::class,'update'])->name('gaji.update');
     Route::post('delete/{id}', [GajiController::class,'delete'])->name('gaji.delete');
+    Route::post('soft_delete/{id}', [GajiController::class,'soft_delete'])->name('gaji.soft_delete');
 });
 
 Route::prefix('perusahaan')->group(function(){
@@ -54,6 +55,7 @@ Route::prefix('perusahaan')->group(function(){
     Route::get('edit/{id}', [PerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::post('update/{id}', [PerusahaanController::class,'update'])->name('perusahaan.update');
     Route::post('delete/{id}', [PerusahaanController::class,'delete'])->name('perusahaan.delete');
+    Route::post('soft_delete/{id}', [perusahaanController::class,'soft_delete'])->name('perusahaan.soft_delete');
 });
 
 //Login

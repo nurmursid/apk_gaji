@@ -28,11 +28,16 @@
                 <td>{{ $data->tunjangan }}</td>
 
                 <td>
-                    <a href="{{ route('gaji.edit', $data->id_gaji) }}" type="button" class="btn btn-warning rounded-3">Ubah</a>
+                    <a href="{{ route('gaji.edit', $data->id_gaji) }}" type="button" class="btn btn-warning rounded-3">
+                    <i class="nc-icon nc-tap-01"></i>
+                    edit
+                    </a>
 
                     <!-- Button trigger modal -->
+                    <!-- Hard Delete -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal{{ $data->id_gaji }}">
-                        Hapus
+                    <i class="nc-icon nc-simple-remove"></i>
+                    delete
                     </button>
 
                     <!-- Modal -->
@@ -56,8 +61,39 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Button trigger modal -->
+                    <!-- Soft Delete -->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#softdelete{{ $data->id_gaji }}">
+                        <i class="nc-icon nc-scissors"></i>
+                        soft delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="softdelete{{ $data->id_gaji }}" tabindex="-1" aria-labelledby="softdeleteLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="softdeleteLabel">Konfirmasi</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{ route('gaji.soft_delete', $data->id_gaji) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus data ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Ya</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
+
+                
         @endforeach
         {{-- <tr>
             <td>1</td>
