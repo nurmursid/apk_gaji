@@ -64,24 +64,17 @@ class PerusahaanController extends Controller
         ]);
 
         // Menggunakan Query Builder Laravel dan perusahaand Bindings untuk valuesnya
-        DB::update('UPDATE perusahaan SET id_perusahaan = :id_perusahaan, nama_perusahaan = :nama_perusahaan, 
-        daerah = :daerah, WHERE id_perusahaan = :id',
+        DB::update('UPDATE perusahaan 
+        SET nama_perusahaan = :nama_perusahaan, 
+        daerah = :daerah
+        WHERE id_perusahaan = :id_perusahaan',
         [
-            'id' => $id,
-            'id_perusahaan' => $request->id_perusahaan,
+            'id_perusahaan' => $id,
             'nama_perusahaan' => $request->nama_perusahaan,
             'daerah' => $request->daerah,
 
         ]
         );
-
-        // Menggunakan laravel eloquent
-        // perusahaan::where('id_perusahaan', $id)->update([
-        //     'id_perusahaan' => $request->id_perusahaan,
-        //     'id_perusahaan' => $request->id_perusahaan,
-        //     'perusahaanperusahaan' => $request->perusahaanperusahaan,
-        //     'daerah' => $request->daerah,
-        // ]);
 
         return redirect()->route('perusahaan.index')->with('success', 'Data perusahaan berhasil diubah');
     }

@@ -10,10 +10,7 @@ class GajiController extends Controller
 {
     public function index(Request $request) {
 
-        $datas = DB::select('SELECT * from gaji
-        WHERE gaji.deleted_at is NULL',
-    
-    );
+        $datas = DB::select('SELECT * from gaji');
 
         return view('gaji.index')
             ->with('datas', $datas);
@@ -69,24 +66,17 @@ class GajiController extends Controller
         ]);
 
         // Menggunakan Query Builder Laravel dan gajid Bindings untuk valuesnya
-        DB::update('UPDATE gaji SET id_gaji = :id_gaji, gaji_pokok = :gaji_pokok, 
-        tunjangan = :tunjangan, WHERE id_gaji = :id',
+        DB::update('UPDATE gaji 
+        SET gaji_pokok = :gaji_pokok, 
+        tunjangan = :tunjangan
+        WHERE id_gaji = :id_gaji',
         [
-            'id' => $id,
-            'id_gaji' => $request->id_gaji,
+            'id_gaji' => $id,
             'gaji_pokok' => $request->gaji_pokok,
             'tunjangan' => $request->tunjangan,
 
         ]
         );
-
-        // Menggunakan laravel eloquent
-        // gaji::where('id_gaji', $id)->update([
-        //     'id_gaji' => $request->id_gaji,
-        //     'id_gaji' => $request->id_gaji,
-        //     'gajigaji' => $request->gajigaji,
-        //     'tunjangan' => $request->tunjangan,
-        // ]);
 
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil diubah');
     }
