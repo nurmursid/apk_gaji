@@ -26,8 +26,8 @@
                 <input type="text" class="form-control" id="id_perusahaan" name="id_perusahaan" value="{{ $data->id_perusahaan }}">
             </div>
             <div class="mb-3">
-                <label for="nam_perusahaan" class="form-label">Nama Perusahaan</label>
-                <input type="text" class="form-control" id="nam_perusahaan" name="nam_perusahaan" value="{{ $data->nam_perusahaan }}">
+                <label for="nama_perusahaan" class="form-label">Nama Perusahaan</label>
+                <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" value="{{ $data->nama_perusahaan }}">
             </div>
             <div class="mb-3">
                 <label for="daerah" class="form-label">Daerah</label>

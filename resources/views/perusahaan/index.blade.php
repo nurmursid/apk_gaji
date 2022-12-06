@@ -2,7 +2,7 @@
 
 @section('content')
 
-<a href="{{ route('gaji.create') }}" type="button" class="btn btn-success rounded-3">Tambah Data</a>
+<a href="{{ route('perusahaan.create') }}" type="button" class="btn btn-success rounded-3">Tambah Data</a>
 
 @if($message = Session::get('success'))
     <div class="alert alert-success mt-3" role="alert">
@@ -28,11 +28,15 @@
                 <td>{{ $data->daerah }}</td>
 
                 <td>
-                    <a href="{{ route('gaji.edit', $data->id_perusahaan) }}" type="button" class="btn btn-warning rounded-3">Ubah</a>
+                    <a href="{{ route('perusahaan.edit', $data->id_perusahaan) }}" type="button" class="btn btn-warning rounded-3">
+                    <i class="nc-icon nc-tap-01"></i>
+                    edit
+                    </a>
 
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal{{ $data->id_perusahaan }}">
-                        Hapus
+                    <i class="nc-icon nc-simple-remove"></i>
+                    delete
                     </button>
 
                     <!-- Modal -->
@@ -43,7 +47,7 @@
                                     <h5 class="modal-title" id="hapusModalLabel">Konfirmasi</h5>
                                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form method="POST" action="{{ route('gaji.delete', $data->id_perusahaan) }}">
+                                <form method="POST" action="{{ route('perusahaan.delete', $data->id_perusahaan) }}">
                                     @csrf
                                     <div class="modal-body">
                                         Apakah anda yakin ingin menghapus data ini?

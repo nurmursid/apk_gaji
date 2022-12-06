@@ -24,14 +24,23 @@ class PegawaiController extends Controller
         LEFT JOIN perusahaan
         ON perusahaan.id_perusahaan = pegawai.id_perusahaan
         WHERE pegawai.nama_pegawai LIKE :search 
-        AND pegawai.deleted_at is NULL",
-        [
-            "search" => '%'.$search.'%'
-        ]
-        );
+        AND pegawai.is_delete = 0",
+
+        ["search" => '%'.$search.'%']);
+         $datas2 = DB::select("SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.jabatan, pegawai.jenis_kelamin, pegawai.alamat, 
+        gaji.id_gaji, gaji.gaji_pokok, gaji.tunjangan,
+        perusahaan.nama_perusahaan, perusahaan.daerah, perusahaan.id_perusahaan
+        FROM pegawai
+        LEFT JOIN gaji
+        ON pegawai.id_gaji = gaji.id_gaji
+        LEFT JOIN perusahaan
+        ON perusahaan.id_perusahaan = pegawai.id_perusahaan
+        WHERE pegawai.is_delete = 1");
 
         // mengirim data pegawai ke view index
-        return view('pegawai.index',['datas' => $datas]);
+        return view('pegawai.index')
+                ->with('datas', $datas)
+                ->with('datas2', $datas2);
         }
 
         else{       
@@ -43,10 +52,21 @@ class PegawaiController extends Controller
         ON pegawai.id_gaji = gaji.id_gaji
         LEFT JOIN perusahaan
         ON perusahaan.id_perusahaan = pegawai.id_perusahaan
-        WHERE pegawai.deleted_at is NULL');
+        WHERE pegawai.is_delete = 0');
+
+        $datas2 = DB::select('SELECT pegawai.id_pegawai, pegawai.nama_pegawai, pegawai.jabatan, pegawai.jenis_kelamin, pegawai.alamat, gaji.id_gaji,
+        gaji.gaji_pokok, gaji.tunjangan,
+        perusahaan.nama_perusahaan, perusahaan.daerah,  perusahaan.id_perusahaan
+        FROM pegawai
+        LEFT JOIN gaji
+        ON pegawai.id_gaji = gaji.id_gaji
+        LEFT JOIN perusahaan
+        ON perusahaan.id_perusahaan = pegawai.id_perusahaan
+        WHERE pegawai.is_delete = 1');
 
         return view('pegawai.index')
-            ->with('datas', $datas);
+        ->with('datas', $datas)
+        ->with('datas2', $datas2);
         }
     }
 
@@ -147,14 +167,24 @@ class PegawaiController extends Controller
 
         // Menggunakan Query Builder Laravel dan pegawaid Bindings untuk valuesnya
         DB::update('UPDATE pegawai 
-        SET deleted_at = now()
+        SET is_delete = 1 
+        WHERE id_pegawai = :id_pegawai', 
+        ['id_pegawai' => $id]);
+
+        return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil dihapus');
+    }
+
+    public function restore($id, Request $request)
+    {
+        DB::update('UPDATE pegawai 
+        SET is_delete = 0
         WHERE id_pegawai = :id_pegawai',
         [
             'id_pegawai' => $id,
         ]
         );
 
-        return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil dihapus');
+        return redirect()->route('pegawai.index')->with('success', 'Data pegawai berhasil dipulihkan');
     }
 
 

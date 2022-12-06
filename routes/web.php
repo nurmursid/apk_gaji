@@ -18,11 +18,11 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
 });
-
-//Tampilan
+ */
+//Tampilan  
 
 
 Route::get('/', [LoginController::class, 'ShowLoginForm'])->name('login.index');
@@ -38,6 +38,7 @@ Route::prefix('pegawai')->group(function(){
     Route::post('delete/{id}', [PegawaiController::class,'delete'])->name('pegawai.delete');
     Route::get('search', [PegawaiController::class,'search'])->name('pegawai.search');
     Route::post('soft_delete/{id}', [PegawaiController::class,'soft_delete'])->name('pegawai.soft_delete');
+    Route::post('restore/{id}', [PegawaiController::class,'restore'])->name('pegawai.restore');
 });
 
 Route::prefix('gaji')->group(function(){
@@ -46,7 +47,6 @@ Route::prefix('gaji')->group(function(){
     Route::get('edit/{id}', [GajiController::class, 'edit'])->name('gaji.edit');
     Route::post('update/{id}', [GajiController::class,'update'])->name('gaji.update');
     Route::post('delete/{id}', [GajiController::class,'delete'])->name('gaji.delete');
-    Route::post('soft_delete/{id}', [GajiController::class,'soft_delete'])->name('gaji.soft_delete');
 });
 
 Route::prefix('perusahaan')->group(function(){
@@ -55,7 +55,6 @@ Route::prefix('perusahaan')->group(function(){
     Route::get('edit/{id}', [PerusahaanController::class, 'edit'])->name('perusahaan.edit');
     Route::post('update/{id}', [PerusahaanController::class,'update'])->name('perusahaan.update');
     Route::post('delete/{id}', [PerusahaanController::class,'delete'])->name('perusahaan.delete');
-    Route::post('soft_delete/{id}', [perusahaanController::class,'soft_delete'])->name('perusahaan.soft_delete');
 });
 
 //Login

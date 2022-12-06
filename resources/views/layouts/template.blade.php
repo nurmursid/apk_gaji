@@ -20,7 +20,7 @@
 <body class="">
   <div class="wrapper">
   @include('layouts.sidebar')
-  <div class="main-panel"style="height: 100vh;">
+  <div class="main-panel"style="height: auto;">
     @include('layouts.navbar')
     <div class="content">
     @yield('content')

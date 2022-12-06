@@ -90,7 +90,7 @@
                                 <form method="POST" action="{{ route('pegawai.soft_delete', $data->id_pegawai) }}">
                                     @csrf
                                     <div class="modal-body">
-                                        Apakah anda yakin ingin menghapus data ini?
+                                        Apakah anda yakin ingin menyembunyikan data ini?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -100,6 +100,8 @@
                             </div>
                         </div>
                     </div>
+
+
                 </td>
             </tr>
         @endforeach
@@ -136,5 +138,103 @@
         </tr> --}}
     </tbody>
 </table>
+  
+
+<div class="card">
+<div class="card-body">
+<h5 class="card-title">Data yang terhapus</h5>
+<table class="table table-hover mt-2">
+    <thead>
+      <tr>
+        <th>ID pegawai</th>
+        <th>Nama Pegawai</th>
+        <th>Jenis Kelamin</th>
+        <th>Jabatan</th>
+        <th>Alamat</th>
+        <th>Gaji Pokok</th>
+        <th>tunjangan</th>
+        <th>Nama Perusahaan</th>
+        <th>Daerah</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        @foreach ($datas2 as $data)
+            <tr>
+                <td>{{ $data->id_pegawai }}</td>
+                <td>{{ $data->nama_pegawai }}</td>
+                <td>{{ $data->jenis_kelamin }}</td>
+                <td>{{ $data->jabatan }}</td>
+                <td>{{ $data->alamat }}</td>
+                <td>{{ $data->gaji_pokok }}</td>
+                <td>{{ $data->tunjangan}}</td>
+                <td>{{ $data->nama_perusahaan }}</td>
+                <td>{{ $data->daerah }}</td>
+                <td>
+
+                <!-- Button trigger modal -->
+                    <!-- Hard Delete -->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#hapusModal{{ $data->id_pegawai }}">
+                        <i class="nc-icon nc-simple-remove"></i>
+                        delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="hapusModal{{ $data->id_pegawai }}" tabindex="-1" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="hapusModalLabel">Konfirmasi</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{ route('pegawai.delete', $data->id_pegawai) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin menghapus data ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Ya</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+          
+                    <!-- Button trigger modal -->
+                    <!-- Restore -->
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#restore{{ $data->id_pegawai }}">
+                        <i class="nc-icon nc-scissors"></i>
+                        Restore
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="restore{{ $data->id_pegawai }}" tabindex="-1" aria-labelledby="restoreLabel" aria-hidden="close">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="restoreLabel">Konfirmasi</h5>
+                                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST" action="{{ route('pegawai.restore', $data->id_pegawai) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        Apakah anda yakin ingin memulihkan data ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Ya</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        @endforeach
        
+    </tbody>
+</table>
+
 @endsection

@@ -101,18 +101,4 @@ class GajiController extends Controller
         return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus');
     }
 
-    public function soft_delete($id, Request $request) {
-
-        // Menggunakan Query Builder Laravel dan pegawaid Bindings untuk valuesnya
-        DB::update('UPDATE gaji 
-        SET deleted_at = now()
-        WHERE id_gaji = :id_gaji',
-        [
-            'id_gaji' => $id,
-        ]
-        );
-
-        return redirect()->route('gaji.index')->with('success', 'Data gaji berhasil dihapus');
-    }
-
 }
